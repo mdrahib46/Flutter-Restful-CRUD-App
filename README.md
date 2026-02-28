@@ -1,5 +1,5 @@
 
-# PostApp - Flutter Todo Application
+# TodoApp - Flutter Todo Application
 
 A modern **Flutter Todo App** designed to manage tasks efficiently. This project demonstrates **Flutter development**, **API integration**, and **state management** using a clean and maintainable architecture.
 
@@ -7,7 +7,7 @@ A modern **Flutter Todo App** designed to manage tasks efficiently. This project
 
 ## Overview
 
-**PostApp** allows users to:
+**TodoApp** allows users to:
 
 - Create, view, update, and delete tasks
 - See task details with creation date
@@ -36,7 +36,7 @@ The app interacts with a REST API backend to persist and manage task data.
 
 <!-- First row: 2 images -->
 <div style="display: flex; gap: 60px;">
-  <img src="https://github.com/user-attachments/assets/bc1fc74b-8cdf-41bb-9aa7-2ffdbff56bb9" height="600" />
+  <img height="600" alt="Screenshot_20260228_154658" src="https://github.com/user-attachments/assets/afb4c339-52c9-4468-b680-b33fde9338cc" />
   <img src="https://github.com/user-attachments/assets/7136b3cd-9378-4aaa-a448-c4bcc30a8206" height="600" />
 </div>
 
