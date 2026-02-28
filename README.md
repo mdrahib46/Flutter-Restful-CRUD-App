@@ -115,7 +115,7 @@ Contributions are welcome! Please follow these steps:
 This project is licensed under the **MIT License**.
 © 2026 MD Rahib
 
-**For DM**
+**Connect with me For DM**
 ```bash
 www.linkedin.com/in/rahib-in/
 ```
