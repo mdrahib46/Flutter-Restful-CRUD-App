@@ -58,7 +58,6 @@ git clone https://github.com/your-username/postapp.git
 ```
 
 2. **Navigate to the project directory**
-3. 
 ```bash
 cd postapp
 ```
