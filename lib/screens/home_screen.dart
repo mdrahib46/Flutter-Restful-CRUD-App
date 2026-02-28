@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:postapp/model/post_list_model.dart';
+import 'package:postapp/model/todo_list_model.dart';
+import 'package:postapp/screens/task_form.dart';
 import 'package:postapp/services/network_caller.dart';
 import 'package:postapp/services/network_response.dart';
 import 'package:postapp/urls.dart';
@@ -13,34 +13,53 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController userIdTEController = TextEditingController();
-  final TextEditingController titleTEController = TextEditingController();
-  final TextEditingController bodyTEController = TextEditingController();
-
-  List<PostListModel> postList = [];
+  List<TodoListModel> postList = [];
   bool _inProgress = false;
 
   Future<void> fetchPost() async {
     setState(() => _inProgress = true);
 
-    final NetworkResponse response =
-    await NetworkCaller.getRequest(url: Urls.getPost);
+    final NetworkResponse response = await NetworkCaller.getRequest(
+      url: Urls.getPost,
+    );
 
     if (response.isSuccess) {
       final List<dynamic> postListModel = response.responseData;
 
       setState(() {
-        postList =
-            postListModel.map((e) => PostListModel.fromJson(e)).toList();
+        postList = postListModel.map((e) => TodoListModel.fromJson(e)).toList();
       });
     } else {
       print('Failed to fetch posts: ${response.statusCode}');
     }
-
     setState(() => _inProgress = false);
   }
 
+  Future<void> deleteTodo({required String id}) async {
+    setState(() {
+      _inProgress = true;
+    });
 
+    final NetworkResponse response = await NetworkCaller.deleteRequest(
+      url: Urls.deleteTodo(id),
+    );
+    setState(() {
+      _inProgress = false;
+    });
+    if (response.isSuccess) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Task has been deleted....!')));
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Task has been deleted....!')));
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -55,81 +74,19 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Post App', style: TextStyle(fontWeight: FontWeight.w600)),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text("Add Post"),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
-                      controller: userIdTEController,
-                      decoration: InputDecoration(
-                        label: Text('User Id'),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: titleTEController,
-                      decoration: InputDecoration(
-                        label: Text('Title'),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: bodyTEController,
-                      decoration: InputDecoration(
-                        label: Text('Body'),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(8),
-                            ),
-                          ),
-                          child: Text('Cancel'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(8),
-                            ),
-                          ),
-                          child: Text('Submit'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TaskForm()),
           );
+          if (result == true) {
+            fetchPost();
+          }
         },
         child: const Icon(Icons.add),
       ),
       body: Column(
         children: [
-
           Expanded(
             child: RefreshIndicator(
               onRefresh: fetchPost,
@@ -149,18 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: ListTile(
                             title: Text(
-                              'Post Id: ${item.id ?? 0}',
+                              item.title ?? '',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item.title ?? '',
-                                  style: TextStyle(fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
-                                ),
-                                Text(
-                                  item.body ?? '',
+                                  item.description ?? '',
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
@@ -168,10 +121,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                  TextButton(onPressed: (){}, child: Icon(Icons.remove_red_eye)),
-                                  TextButton(onPressed: (){}, child: Icon(Icons.edit)),
-                                  TextButton(onPressed: (){}, child: Icon(Icons.delete)),
-                                ],)
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Icon(Icons.remove_red_eye),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        final result = await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => TaskForm(
+                                              todoListModel: item,
+                                            ),
+                                          ),
+                                        );
+                                        if (result == true) {
+                                          await fetchPost();
+                                        }
+                                      },
+                                      child: Icon(Icons.edit),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        await deleteTodo(
+                                          id: item.sId.toString(),
+                                        );
+                                        await fetchPost();
+                                      },
+                                      child: Icon(Icons.delete),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

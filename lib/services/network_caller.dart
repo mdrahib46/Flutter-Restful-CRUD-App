@@ -48,7 +48,7 @@ class NetworkCaller {
 
       final decodedResponse = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode >= 200 && response.statusCode <= 300) {
         return NetworkResponse(
           isSuccess: true,
           statusCode: response.statusCode,
@@ -72,7 +72,7 @@ class NetworkCaller {
 
   static Future<NetworkResponse> purRequest({
     required String url,
-    required Map<String, dynamic>? body,
+    required Map<String, String>? body,
   }) async {
     try {
       Uri uri = Uri.parse(url);
@@ -109,7 +109,7 @@ class NetworkCaller {
 
   static Future<NetworkResponse> deleteRequest({
     required String url,
-    required Map<String, dynamic>? body,
+
   }) async {
     try {
       Uri uri = Uri.parse(url);
@@ -117,7 +117,7 @@ class NetworkCaller {
       final http.Response response = await http.delete(
         uri,
         headers: headers,
-        body: jsonEncode(body),
+
       );
 
       final decodedResponse = jsonDecode(response.body);

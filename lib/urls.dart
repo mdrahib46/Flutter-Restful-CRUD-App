@@ -1,10 +1,10 @@
 
 class Urls {
-  static const String _baseUrl = 'https://jsonplaceholder.typicode.com';
+  static const String _baseUrl = 'https://todo-restapi-crud-render.onrender.com';
 
-  static const getPost = '$_baseUrl/posts';
-  static String getSinglePost(String id) => '$_baseUrl/posts/$id';
-  static const createPost = '$_baseUrl/posts';
-  static String updatePost(String id) => '$_baseUrl/posts/$id';
-  static String deletePost(String id) => '$_baseUrl/posts/$id';
+  static const getPost = '$_baseUrl/get_all_todo';
+  static String getTodoById(String id) => '$_baseUrl/get_todo_by_id/$id';
+  static const createTodo = '$_baseUrl/create_todo';
+  static String updateTodo({required String id}) => '$_baseUrl/update_todo_by_id/$id';
+  static String deleteTodo(String id) => '$_baseUrl/delete_todo_by_id/$id';
 }
