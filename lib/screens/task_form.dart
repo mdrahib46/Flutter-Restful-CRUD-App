@@ -45,8 +45,6 @@ class _TaskFormState extends State<TaskForm> {
         Navigator.pop(context, true);
       }
     } else {
-      print(response.statusCode);
-      print(response.responseData);
       if (mounted) {
         ScaffoldMessenger.of(
           context,

@@ -16,14 +16,9 @@ class ViewTaskScreen extends StatefulWidget {
 class _ViewTaskScreenState extends State<ViewTaskScreen> {
   TodoListModel? todo;
   bool _inProgress = false;
-  late DateTime parseDate = DateTime.parse(todo!.createdDate!);
-  late String date = DateFormat('dd-MM-yyyy').format(parseDate);
+  late final DateTime _parseDate = DateTime.parse(todo!.createdDate!);
+  late final String _date = DateFormat('dd-MM-yyyy').format(_parseDate);
 
-  @override
-  void initState() {
-    super.initState();
-    viewTask();
-  }
 
   Future<void> viewTask() async {
     setState(() => _inProgress = true);
@@ -43,13 +38,18 @@ class _ViewTaskScreenState extends State<ViewTaskScreen> {
         });
       }
     } else {
-      print((response.responseData));
       if (mounted) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(response.errorMessage)));
       }
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    viewTask();
   }
 
   @override
@@ -91,7 +91,7 @@ class _ViewTaskScreenState extends State<ViewTaskScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Created At: ${date}',
+                      'Created At: $_date',
                       style: const TextStyle(fontSize: 12),
                     ),
                     const SizedBox(height: 16),
