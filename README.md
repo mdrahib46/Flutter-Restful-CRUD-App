@@ -82,7 +82,7 @@ flutter run
 * **REST API** – Backend integration
 * **Firebase** – Optional backend support
 * **HTTP package** – Network requests
-* **MS Office 365** – Skill reference for project reporting
+* **Intl packge** - Date formating
 
 ---
 
@@ -92,7 +92,7 @@ flutter run
 lib/
  ├── model/          # Data models
  ├── screens/        # UI screens (Home, TaskForm, ViewTask)
- ├── services/       # API calls & network helpers
+ ├── services/       # NetworkResponse & Network Callers
  └── urls.dart       # API endpoint definitions
 ```
 
@@ -114,6 +114,8 @@ Contributions are welcome! Please follow these steps:
 
 This project is licensed under the **MIT License**.
 © 2026 MD Rahib
+
+**For DM**
 ```bash
 www.linkedin.com/in/rahib-in/
 ```
