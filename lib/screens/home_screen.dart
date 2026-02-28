@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:postapp/model/todo_list_model.dart';
 import 'package:postapp/screens/task_form.dart';
+import 'package:postapp/screens/view_task_screen.dart';
 import 'package:postapp/services/network_caller.dart';
 import 'package:postapp/services/network_response.dart';
 import 'package:postapp/urls.dart';
@@ -122,7 +123,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     TextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewTaskScreen(id: postList[index].sId.toString(),)));
+                                      },
                                       child: Icon(Icons.remove_red_eye),
                                     ),
                                     TextButton(

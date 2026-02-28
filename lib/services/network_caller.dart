@@ -70,7 +70,7 @@ class NetworkCaller {
     }
   }
 
-  static Future<NetworkResponse> purRequest({
+  static Future<NetworkResponse> putRequest({
     required String url,
     required Map<String, String>? body,
   }) async {

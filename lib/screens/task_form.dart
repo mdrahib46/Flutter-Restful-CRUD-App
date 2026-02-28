@@ -64,7 +64,7 @@ class _TaskFormState extends State<TaskForm> {
       "title": titleTEController.text.trim(),
       "description": descTEController.text.trim(),
     };
-    final NetworkResponse response = await NetworkCaller.purRequest(
+    final NetworkResponse response = await NetworkCaller.putRequest(
       url: Urls.updateTodo(id: widget.todoListModel!.sId.toString()),
       body: requestBody,
     );
