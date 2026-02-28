@@ -1,8 +1,4 @@
-Sure! Here’s a **professional, GitHub-ready `README.md`** for your Flutter Todo project, written in a clean, structured, and professional style. You can copy it as-is and later add your screenshots and repository link.
 
----
-
-````markdown
 # PostApp - Flutter Todo Application
 
 A modern **Flutter Todo App** designed to manage tasks efficiently. This project demonstrates **Flutter development**, **API integration**, and **state management** using a clean and maintainable architecture.
@@ -57,7 +53,7 @@ The app interacts with a REST API backend to persist and manage task data.
 
 ```bash
 git clone https://github.com/your-username/postapp.git
-````
+
 
 2. **Navigate to the project directory**
 
