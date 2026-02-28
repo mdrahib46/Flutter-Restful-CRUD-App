@@ -55,10 +55,10 @@ The app interacts with a REST API backend to persist and manage task data.
 
 ```bash
 git clone https://github.com/your-username/postapp.git
-
+```
 
 2. **Navigate to the project directory**
-
+3. 
 ```bash
 cd postapp
 ```
@@ -115,6 +115,8 @@ Contributions are welcome! Please follow these steps:
 
 This project is licensed under the **MIT License**.
 © 2026 MD Rahib
-
+```bash
+www.linkedin.com/in/rahib-in/
 ```
+
 
