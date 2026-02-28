@@ -35,13 +35,13 @@ The app interacts with a REST API backend to persist and manage task data.
 
 
 <!-- First row: 2 images -->
-<div style="display: flex; gap: 50px;">
+<div style="display: flex; gap: 60px;">
   <img src="https://github.com/user-attachments/assets/bc1fc74b-8cdf-41bb-9aa7-2ffdbff56bb9" height="600" />
   <img src="https://github.com/user-attachments/assets/7136b3cd-9378-4aaa-a448-c4bcc30a8206" height="600" />
 </div>
 
 <!-- Second row: 2 images -->
-<div style="display: flex; gap: 10px; margin-top: 10px;">
+<div style="display: flex; gap: 60px; margin-top: 60px;">
   <img src="https://github.com/user-attachments/assets/78a1ecca-9f22-4b94-8007-94d82fac4af1" height="600" />
   <img src="https://github.com/user-attachments/assets/a245045c-513e-4312-a83e-69f4fb04783b" height="600" />
 </div>
